@@ -30,6 +30,7 @@
         {
             labelY = new Label();
             labelX = new Label();
+            ConnectBtn = new Button();
             SuspendLayout();
             // 
             // labelY
@@ -51,11 +52,22 @@
             labelX.TabIndex = 1;
             labelX.Text = "10";
             // 
+            // ConnectBtn
+            // 
+            ConnectBtn.Location = new Point(297, 486);
+            ConnectBtn.Name = "ConnectBtn";
+            ConnectBtn.Size = new Size(147, 29);
+            ConnectBtn.TabIndex = 2;
+            ConnectBtn.Text = "Connect dots";
+            ConnectBtn.UseVisualStyleBackColor = true;
+            ConnectBtn.Click += ConnectBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 463);
+            ClientSize = new Size(804, 517);
+            Controls.Add(ConnectBtn);
             Controls.Add(labelX);
             Controls.Add(labelY);
             Name = "Form1";
@@ -70,5 +82,6 @@
 
         private Label labelY;
         private Label labelX;
+        private Button ConnectBtn;
     }
 }

@@ -36,5 +36,15 @@ namespace AlgApp
         {
 
         }
+
+        private void ConnectBtn_Click(object sender, EventArgs e)
+        {
+            //MinCostConnections mcc = new MinCostConnections();
+            //int res = MinCostConnections.MinCost(ge.cDots);
+            //MessageBox.Show(""+res);
+
+            int res = MinStraightLines.MinimumLines(ge.cDots);
+            MessageBox.Show("" + res);
+        }
     }
 }
