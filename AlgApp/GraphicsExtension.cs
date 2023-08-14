@@ -12,6 +12,7 @@ namespace AlgApp
         internal Point ClickedPoint { get; set; }
         private Control.ControlCollection Controls;
         public List<CDot> cDots = new List<CDot>();
+        public List<MSTNode> visitedPoints = new List<MSTNode>();
         public int CanvasX = 10;
         public int CanvasY = 10;
         public int y_axis1 = 20;
@@ -27,13 +28,24 @@ namespace AlgApp
             FillOutAxePoints();
         }
 
-        public  void PaintCanvas(PaintEventArgs pea)
+        public void PaintCanvas(PaintEventArgs pea)
         {
             // draw backgroung
             Pen pen = new Pen(Color.Black, 2.5F);
             pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis1), new Point(x_axis1, y_axis2));
             pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis2), new Point(x_axis2, y_axis2));
 
+            if (visitedPoints.Count > 0)
+            {
+                foreach (var line in visitedPoints)
+                {
+                    int i = line.id;
+                    int j = line.start;
+                    Point p1 = cDots[i].Location;
+                    Point p2 = cDots[j].Location;
+                    pea.Graphics.DrawLine(pen, new Point(p1.X + 3, p1.Y + 4), new Point(p2.X + 3, p2.Y + 4));
+                }
+            }
 
             if (cDots.Count > 0)
             {
@@ -50,7 +62,6 @@ namespace AlgApp
             var x = NormalizeNumber(loc.X, x_axis1, x_axis2, CanvasX, true);
             var y = NormalizeNumber(loc.Y, y_axis1, y_axis2, CanvasY, false);
             Point normalizedPoint = new Point(Convert.ToInt32(x), Convert.ToInt32(y));
-
 
             var b = cDots.FirstOrDefault<CDot>(c => c.Normalized.Equals(normalizedPoint));
             if (b == null)
@@ -78,7 +89,6 @@ namespace AlgApp
             {
                 return limit - Decimal.Round(d, 0);
             }
-
         }
 
 

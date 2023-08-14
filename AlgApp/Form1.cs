@@ -27,8 +27,8 @@ namespace AlgApp
             {
                 ge.CreateNewDot(e.Location);
                 //ge.ClickedPoint = e.Location;
-                //this.Invalidate();
-                this.Refresh();
+                this.Invalidate();
+                //this.Refresh();
             }
         }
 
@@ -39,12 +39,13 @@ namespace AlgApp
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
-            //MinCostConnections mcc = new MinCostConnections();
-            //int res = MinCostConnections.MinCost(ge.cDots);
-            //MessageBox.Show(""+res);
-
-            int res = MinStraightLines.MinimumLines(ge.cDots);
+            int res = MinCostConnections.MinCost(ge.cDots, out ge.visitedPoints);
             MessageBox.Show("" + res);
+            //this.Refresh();
+            this.Invalidate();
+
+            //int res = MinStraightLines.MinimumLines(ge.cDots);
+            //MessageBox.Show("" + res);
         }
     }
 }
