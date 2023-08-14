@@ -15,10 +15,10 @@ namespace AlgApp
         public List<MSTNode> visitedPoints = new List<MSTNode>();
         public int CanvasX = 10;
         public int CanvasY = 10;
-        public int y_axis1 = 20;
-        public int y_axis2 = 420;
-        public int x_axis1 = 35;
-        public int x_axis2 = 770;
+        public int y_axis1 = 110;
+        public int y_axis2 = 510;
+        public int x_axis1 = 100;
+        public int x_axis2 = 840;
         public List<int> x_axe_points = new List<int>();
         public List<int> y_axe_points = new List<int>();
 
@@ -33,7 +33,14 @@ namespace AlgApp
             // draw backgroung
             Pen pen = new Pen(Color.Black, 2.5F);
             pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis1), new Point(x_axis1, y_axis2));
+            pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis1), new Point(x_axis1 - 4, y_axis1 + 4));
+            pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis1), new Point(x_axis1 + 4, y_axis1 + 4));
             pea.Graphics.DrawLine(pen, new Point(x_axis1, y_axis2), new Point(x_axis2, y_axis2));
+            pea.Graphics.DrawLine(pen, new Point(x_axis2, y_axis2), new Point(x_axis2 - 4, y_axis2 + 4));
+            pea.Graphics.DrawLine(pen, new Point(x_axis2, y_axis2), new Point(x_axis2 - 4, y_axis2 - 4));
+            pea.Graphics.DrawString(CanvasX.ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), new Point(x_axis1 - 30, y_axis1));
+            pea.Graphics.DrawString(CanvasY.ToString(), new Font("Arial", 10), new SolidBrush(Color.Black), new Point(x_axis2 - 25, y_axis2 + 10));
+            pea.Graphics.DrawString("0", new Font("Arial", 10), new SolidBrush(Color.Black), new Point(x_axis1 - 15, y_axis2 + 8));
 
             if (visitedPoints.Count > 0)
             {

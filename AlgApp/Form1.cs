@@ -47,5 +47,34 @@ namespace AlgApp
             //int res = MinStraightLines.MinimumLines(ge.cDots);
             //MessageBox.Show("" + res);
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void findMinCostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ge.visitedPoints.Clear();
+            int res = MinCostConnections.MinCost(ge.cDots, out ge.visitedPoints);
+            this.Invalidate();
+            resultTextBox.Text = $"The cost is: {res}";
+        }
+
+        private void findMinLineNumberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ge.visitedPoints.Clear();
+            int res = MinStraightLines.MinimumLines(ge.cDots);
+            this.Invalidate();
+            resultTextBox.Text = $"The number of line is: {res}";
+        }
+
+        private void removeAllPointsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ge.cDots.Clear();
+            ge.visitedPoints.Clear();
+            resultTextBox.Clear();
+            this.Invalidate();
+        }
     }
 }
