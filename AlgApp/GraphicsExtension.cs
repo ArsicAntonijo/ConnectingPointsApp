@@ -13,6 +13,7 @@ namespace AlgApp
         private Control.ControlCollection Controls;
         public List<CDot> cDots = new List<CDot>();
         public List<MSTNode> visitedPoints = new List<MSTNode>();
+        public List<Point> pointsForLines = new List<Point>();
         public int CanvasX = 10;
         public int CanvasY = 10;
         public int y_axis1 = 110;
@@ -50,6 +51,16 @@ namespace AlgApp
                     int j = line.start;
                     Point p1 = cDots[i].Location;
                     Point p2 = cDots[j].Location;
+                    pea.Graphics.DrawLine(pen, new Point(p1.X + 3, p1.Y + 4), new Point(p2.X + 3, p2.Y + 4));
+                }
+            }
+
+            if (pointsForLines.Count > 0)
+            {
+                for (int i = 0; i < pointsForLines.Count - 1; i++) 
+                {
+                    Point p1 = pointsForLines[i];
+                    Point p2 = pointsForLines[i + 1];
                     pea.Graphics.DrawLine(pen, new Point(p1.X + 3, p1.Y + 4), new Point(p2.X + 3, p2.Y + 4));
                 }
             }
@@ -119,6 +130,16 @@ namespace AlgApp
             int closest_x = x_axe_points.OrderBy(v => Math.Abs(v - x)).FirstOrDefault();
             int closest_y = y_axe_points.OrderBy(v => Math.Abs(v - y)).FirstOrDefault();
             return new Point(closest_x, closest_y);
+        }
+
+        public bool CheckPoint(Point location)
+        {
+            if (location.X > x_axis1 && location.X < x_axis2) 
+            {
+                if (location.Y > y_axis1 && location.Y < y_axis2) return true;
+                else return false;
+            } 
+            else return false;
         }
     }
 }

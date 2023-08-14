@@ -97,7 +97,7 @@
             // 
             panel1.BackColor = SystemColors.ControlLight;
             panel1.Controls.Add(panel3);
-            panel1.Location = new Point(0, 31);
+            panel1.Location = new Point(0, 28);
             panel1.Name = "panel1";
             panel1.Size = new Size(55, 624);
             panel1.TabIndex = 4;
@@ -112,7 +112,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLight;
-            panel2.Location = new Point(883, 31);
+            panel2.Location = new Point(883, 28);
             panel2.Name = "panel2";
             panel2.Size = new Size(52, 624);
             panel2.TabIndex = 5;
@@ -128,7 +128,7 @@
             // panel5
             // 
             panel5.BackColor = SystemColors.ControlLight;
-            panel5.Location = new Point(51, 31);
+            panel5.Location = new Point(51, 28);
             panel5.Name = "panel5";
             panel5.Size = new Size(840, 54);
             panel5.TabIndex = 7;
@@ -163,7 +163,7 @@
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Coorinate system problems";
+            Text = "Coordinate system problems";
             Load += Form1_Load;
             MouseClick += mouseClick;
             menuStrip1.ResumeLayout(false);

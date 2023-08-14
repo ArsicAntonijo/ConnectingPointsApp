@@ -23,7 +23,7 @@ namespace AlgApp
 
         private void mouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && ge.CheckPoint(e.Location))
             {
                 ge.CreateNewDot(e.Location);
                 //ge.ClickedPoint = e.Location;
@@ -56,6 +56,7 @@ namespace AlgApp
         private void findMinCostToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ge.visitedPoints.Clear();
+            ge.pointsForLines.Clear();
             int res = MinCostConnections.MinCost(ge.cDots, out ge.visitedPoints);
             this.Invalidate();
             resultTextBox.Text = $"The cost is: {res}";
@@ -64,7 +65,7 @@ namespace AlgApp
         private void findMinLineNumberToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ge.visitedPoints.Clear();
-            int res = MinStraightLines.MinimumLines(ge.cDots);
+            int res = MinStraightLines.MinimumLines(ge.cDots, out ge.pointsForLines);
             this.Invalidate();
             resultTextBox.Text = $"The number of line is: {res}";
         }
@@ -73,6 +74,7 @@ namespace AlgApp
         {
             ge.cDots.Clear();
             ge.visitedPoints.Clear();
+            ge.pointsForLines.Clear();
             resultTextBox.Clear();
             this.Invalidate();
         }

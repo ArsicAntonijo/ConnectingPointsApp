@@ -10,9 +10,12 @@ namespace AlgApp
     public class MinStraightLines
     {
         // Function to find minimum number of lines
-        public static int MinimumLines(List<CDot> arr)
+        public static int MinimumLines(List<CDot> arr, out List<Point> points)
         {
             int n = arr.Count;
+            // object where we store point for lines to be drawn
+            points = new List<Point>();
+
 
             // Base case when there is only one point,
             // then min lines = 0
@@ -22,13 +25,15 @@ namespace AlgApp
             // Sorting in ascending order of X coordinate
             // Array.Sort<int[]>(arr, new Comparer());
             arr.Sort((x, y) => x.Normalized.X.CompareTo(y.Normalized.X));
-
+            
+            // adding starting point
+            points.Add(arr[0].Location);
             int numoflines = 1;
 
             // Traverse through points and check
             // whether the slopes matches or not.
             // If they does not match
-            // increment the count of lines
+            // increment the count of lines            
             for (int i = 2; i < n; i++)
             {
                 int x1 = arr[i].Normalized.X;
@@ -41,8 +46,15 @@ namespace AlgApp
                 int slope2 = (y2 - y1) * (x3 - x2);
 
                 if (slope1 != slope2)
+                {
+                    points.Add(arr[i - 1].Location);
                     numoflines++;
+                }
+                    
             }
+
+            // add last point to be drawn
+            points.Add(arr[arr.Count - 1].Location);
 
             // Return the num of lines
             return numoflines;
