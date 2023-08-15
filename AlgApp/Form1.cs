@@ -29,6 +29,11 @@ namespace AlgApp
                 //ge.ClickedPoint = e.Location;
                 this.Invalidate();
                 //this.Refresh();
+            } 
+            else if(e.Button == MouseButtons.Right && ge.CheckPoint(e.Location))
+            {
+                ge.RemovePoint(e.Location);
+                this.Invalidate();
             }
         }
 
@@ -39,13 +44,6 @@ namespace AlgApp
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
-            int res = MinCostConnections.MinCost(ge.cDots, out ge.visitedPoints);
-            MessageBox.Show("" + res);
-            //this.Refresh();
-            this.Invalidate();
-
-            //int res = MinStraightLines.MinimumLines(ge.cDots);
-            //MessageBox.Show("" + res);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

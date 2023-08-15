@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,9 @@ namespace AlgApp
 {
     public class GraphicsExtension
     {
-        internal Point ClickedPoint { get; set; }
         private Control.ControlCollection Controls;
         public List<CDot> cDots = new List<CDot>();
-        public List<MSTNode> visitedPoints = new List<MSTNode>();
+        public List<Node> visitedPoints = new List<Node>();
         public List<Point> pointsForLines = new List<Point>();
         public int CanvasX = 10;
         public int CanvasY = 10;
@@ -92,7 +92,7 @@ namespace AlgApp
             }
             else
             {
-                MessageBox.Show("ima tacke");
+                MessageBox.Show("On chosen position point already exists.");
             }
         }
 
@@ -140,6 +140,21 @@ namespace AlgApp
                 else return false;
             } 
             else return false;
+        }
+
+        public void RemovePoint(Point location)
+        {
+            var x = NormalizeNumber(location.X, x_axis1, x_axis2, CanvasX, true);
+            var y = NormalizeNumber(location.Y, y_axis1, y_axis2, CanvasY, false);
+            Point normalizedPoint = new Point(Convert.ToInt32(x), Convert.ToInt32(y));
+
+            var b = cDots.FirstOrDefault<CDot>(c => c.Normalized.Equals(normalizedPoint));
+            if (b != null)
+            {
+                cDots.Remove(b);
+                visitedPoints.Clear();
+                pointsForLines.Clear();
+            }
         }
     }
 }

@@ -8,20 +8,20 @@ namespace AlgApp
 {
     public class MinCostConnections
     {
-        public static int MinCost(List<CDot> points, out List<MSTNode> visited)
+        public static int MinCost(List<CDot> points, out List<Node> visited)
         {
             int n = points.Count;
-            MSTNode[,] mst = CreateMST(points, n);
+            Node[,] mst = CreateNodes(points, n);
 
             //Prim
             int res = 0;
-            visited = new List<MSTNode>();
-            var PQ = new PriorityQueue<MSTNode, int>();
-            PQ.Enqueue(new MSTNode(0, 0, 0), 0);
+            visited = new List<Node>();
+            var PQ = new PriorityQueue<Node, int>();
+            PQ.Enqueue(new Node(0, 0, 0), 0);
 
             while (visited.Count < n)
             {
-                MSTNode temp = PQ.Dequeue();
+                Node temp = PQ.Dequeue();
                 if (visited.Where(v => v.id == temp.id).FirstOrDefault() != null) continue;
 
                 res += temp.cost;
@@ -39,9 +39,9 @@ namespace AlgApp
         }
 
 
-        private static MSTNode[,] CreateMST(List<CDot> points, int n)
+        private static Node[,] CreateNodes(List<CDot> points, int n)
         {
-            MSTNode[,] mst = new MSTNode[n, n];
+            Node[,] mst = new Node[n, n];
             for (int i = 0; i < n; i++)
             {
                 //int[] x = points[i];
@@ -51,8 +51,8 @@ namespace AlgApp
                     //int[] y = points[j];
                     Point y = points[j].Normalized;
                     int cost = Distance(x, y);
-                    mst[i, j] = new MSTNode(j, cost, i);
-                    mst[j, i] = new MSTNode(i, cost, j);
+                    mst[i, j] = new Node(j, cost, i);
+                    mst[j, i] = new Node(i, cost, j);
                 }
             }
             return mst;
@@ -64,12 +64,12 @@ namespace AlgApp
         }
     }
 
-    public class MSTNode
+    public class Node
     {
         public int id;
         public int start;
         public int cost;
 
-        public MSTNode(int i, int c, int s) { id = i; cost = c; start = s; }
+        public Node(int i, int c, int s) { id = i; cost = c; start = s; }
     }
 }
