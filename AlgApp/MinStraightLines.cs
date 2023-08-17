@@ -24,7 +24,7 @@ namespace AlgApp
 
             // Sorting in ascending order of X coordinate
             // Array.Sort<int[]>(arr, new Comparer());
-            arr.Sort((x, y) => x.Normalized.X.CompareTo(y.Normalized.X));
+            arr.Sort(new Comparer());
             
             // adding starting point
             points.Add(arr[0].Location);
@@ -62,11 +62,19 @@ namespace AlgApp
     }
 
     // Comparer class implementation
-    class Comparer : IComparer<int[]>
+    class Comparer : IComparer<CDot>
     {
-        public int Compare(int[] x, int[] y)
+        public int Compare(CDot x, CDot y)
         {
-            return x[0].CompareTo(y[0]);
+            int c = x.Normalized.X.CompareTo(y.Normalized.X);
+            if (c != 0)
+            {
+                return c;
+            }
+            else
+            {
+                return x.Normalized.Y.CompareTo(y.Normalized.Y);
+            }
         }
     }
 }
